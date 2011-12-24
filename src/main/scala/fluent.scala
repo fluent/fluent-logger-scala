@@ -24,39 +24,49 @@ import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.channel.{Channel => NettyChannel}
 import org.jboss.netty.channel._
 import org.jboss.netty.buffer._
+import scala.collection.mutable.ConcurrentMap
+import java.util.concurrent.atomic.AtomicLong
+import org.jboss.netty.handler.queue.BufferedWriteHandler
 
 import java.util.Date;
 import java.util.Calendar;
 
-class FluentClientHandler extends SimpleChannelHandler {
-  override def channelConnected(ctx:ChannelHandlerContext, e:ChannelStateEvent) {
-    //println("connected")
-  }
-
-  override def channelClosed(ctx:ChannelHandlerContext , e:ChannelStateEvent ) {
-    //println("closed")
-  }
-
-  override def writeComplete(ctx:ChannelHandlerContext, e:WriteCompletionEvent) = {
-    //println("write complete")
-  }
-
-  override def messageReceived(ctx:ChannelHandlerContext, e:MessageEvent):Unit = {
-    //println("received")
-    e.getMessage();
-    e.getChannel().close();
-  }
-  override def exceptionCaught(ctx:ChannelHandlerContext , e:ExceptionEvent):Unit = {
-    //println("exeception")
-    e.getCause().printStackTrace();
-    e.getChannel().close();
-  }
-}
-
 class FluentClient(h:String, p:Int) extends Actor {
   val host = h
   val port = p
+  val handler:FluentClientHandler = createHandler()
   var channel:org.jboss.netty.channel.Channel = connect()
+
+  class FluentClientHandler() extends BufferedWriteHandler {
+    val bufferSize:AtomicLong = new AtomicLong();
+
+    override def channelConnected(ctx:ChannelHandlerContext, e:ChannelStateEvent) {
+      //println("connected")
+    }
+
+    override def writeRequested(ctx:ChannelHandlerContext, e:MessageEvent) {
+      super.writeRequested(ctx, e);
+
+      val data:ChannelBuffer = e.getMessage().asInstanceOf[ChannelBuffer];
+      val newBufferSize:Long = bufferSize.addAndGet(data.readableBytes());
+
+      // Flush the queue if it gets larger than 8KiB.
+      if (newBufferSize > 0) {
+        flush();
+        bufferSize.set(0);
+      }
+    }
+
+    override def exceptionCaught(ctx:ChannelHandlerContext , e:ExceptionEvent):Unit = {
+      //println("exeception")
+      e.getCause().printStackTrace();
+      e.getChannel().close();
+    }
+  }
+
+  def createHandler():FluentClientHandler = {
+    return new FluentClientHandler();
+  }
 
   def connect():org.jboss.netty.channel.Channel = {
     val bootstrap = new ClientBootstrap(
@@ -66,7 +76,7 @@ class FluentClient(h:String, p:Int) extends Actor {
 
     // Set up the pipeline factory.
     bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
-          def getPipeline() = Channels.pipeline(new FluentClientHandler())
+          def getPipeline() = Channels.pipeline(handler)
     });
 
     bootstrap.setOption("tcpNoDelay" , true);
@@ -78,17 +88,15 @@ class FluentClient(h:String, p:Int) extends Actor {
   }
 
   def send(bin:Array[Byte]):Int = {
-    println("write " + bin.size)
     val buf:ChannelBuffer = ChannelBuffers.buffer(bin.size)
     buf.writeBytes(bin)
     val f = channel.write(buf)
-    f.await()
-    println("wrote?")
 
-    //buf.write
-    //val f = channel.write(buf)
-    //f.await()
     return 0
+  }
+
+  def flush() = {
+    handler.flush()
   }
 
   def close():Unit = {
@@ -106,6 +114,8 @@ class FluentClient(h:String, p:Int) extends Actor {
         act()
       case "close" =>
         close()
+      case "flush" =>
+        flush()
     }
   }
 }
@@ -131,10 +141,17 @@ object FluentLogger {
     client ! json
   }
 
+  def flush() {
+    client ! "flush"
+  }
+
   def main(args: Array[String]):Unit = {
     val cli = new FluentClient("localhost",24224)
     open("localhost", 24224)
-    log("debug.test", mutable.Map("json"->"message"))
+    log("debug.test", mutable.Map("json"->"1"))
+    log("debug.test", mutable.Map("json"->"2"))
+    log("debug.test", mutable.Map("json"->"3"))
+    flush()
     close()
   }
 }
