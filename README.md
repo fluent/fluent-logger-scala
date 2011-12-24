@@ -28,6 +28,7 @@ Simple APIs are provided.
 * open(host:String, port:Int)
 * close()
 * log(tag:String, Map[String,Any])
+* flush() : flush all requests buffered.
 
 
 ## License
