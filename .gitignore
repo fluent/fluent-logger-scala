@@ -1,3 +1,7 @@
+lib/
 target/
 project/boot/
 project/target/
+.classpath
+.cache
+*.swp
