@@ -28,7 +28,7 @@ Main difference between scala and java version is to support Scala Collection.
 
 Add sonatype repository and dependencies to build.sbt file as follows:
 
-    resolvers += "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases"
+    resolvers += "Apache Maven Central Repository" at "http://repo.maven.apache.org/maven2/"
     
     libraryDependencies += "org.fluentd" % "fluent-logger-scala_<scala_version>" % "0.2.0"
     
