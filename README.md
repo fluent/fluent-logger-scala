@@ -26,7 +26,30 @@ Main difference between scala and java version is to support Scala Collection.
 
 ## Installation
 
-maven repository will be available, but currently no support.
+Add sonatype repository and dependencies to build.sbt file as follows:
+
+    resolvers += "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases"
+    
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_<scala_version>" % "0.2.0"
+    
+
+Please replace <scala_version> with scala compiler version you use.
+Currently, <scala_version> can be replaced with 2.8.1, 2.8.2, 2.9.0, 2.9.1, 2.9.2.
+For instance,
+
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.8.1" % "0.2.0"
+
+or
+
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.0" % "0.2.0"
+
+or
+
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.1" % "0.2.0"
+
+or
+
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.2" % "0.2.0"
 
 ## API
 

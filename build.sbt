@@ -1,16 +1,18 @@
+organization := "org.fluentd"
+
 name := "fluent-logger-scala"
 
 version := "0.2.0"
 
 publishMavenStyle := true
 
-crossScalaVersions := Seq("2.8.1", "2.9.0", "2.9.0-1", "2.9.1", "2.9.2") //, "2.10.0-RC2")
+crossScalaVersions := Seq("2.8.1", "2.8.2", "2.9.0", "2.9.1", "2.9.2") //, "2.10.0-RC2")
 
 crossVersion := CrossVersion.full
 
 resolvers ++= Seq(
   "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
-  "Fluentd Repository" at "http://fluentd.org/maven2"
+  "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases"
 )
 
 scalaBinaryVersion <<= scalaBinaryVersion { v =>
@@ -28,9 +30,10 @@ scalacOptions <++= scalaVersion map { v =>
 }
 
 libraryDependencies ++= Seq(
-  "org.fluentd" % "fluent-logger" % "0.2.6",
+  "org.fluentd" % "fluent-logger" % "0.2.7",
   "org.scalatest" %% "scalatest" % "1.8" % "test",
-  "junit" % "junit" % "4.10" % "test"
+  "junit" % "junit" % "4.10" % "test",
+  "org.fluentd" % "fluent-logger-scala_2.9.1" % "0.2.0"
 )
 
 pomExtra := (
