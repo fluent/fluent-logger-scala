@@ -20,10 +20,18 @@ package org.fluentd.logger.scala
 import scala.collection.JavaConversions._
 import org.fluentd.logger.{FluentLogger => JavaFluentLogger}
 import org.fluentd.logger.{FluentLoggerFactory => JavaFluentLoggerFactory}
+import org.fluentd.logger.{Constants => JavaConstants}
 
 
 object FluentLoggerFactory {
   implicit def wrap(logger: JavaFluentLogger): FluentLogger = new FluentLogger(logger)
+  val senderPropertyName = JavaConstants.FLUENT_SENDER_CLASS
+  val scalaSenderName = "RawSocketSender"
+  val senderClassName = 
+    if (System.getProperties().containsKey(senderPropertyName))
+      System.getProperty(senderPropertyName)
+    else 
+      scalaSenderName
   val factory = new JavaFluentLoggerFactory()
   
   def getLogger(tag: String): FluentLogger = {

@@ -6,9 +6,12 @@ version := "0.2.0"
 
 publishMavenStyle := true
 
-crossScalaVersions := Seq("2.8.1", "2.8.2", "2.9.0", "2.9.1", "2.9.2") //, "2.10.0-RC2")
+//crossScalaVersions := Seq("2.8.1", "2.8.2", "2.9.0", "2.9.1", "2.9.2") //, "2.10.0-RC2")
+//crossScalaVersions := Seq("2.9.1") //, "2.10.0-RC2")
+//crossVersion := CrossVersion.full
 
-crossVersion := CrossVersion.full
+scalaVersion := "2.9.1"
+
 
 resolvers ++= Seq(
   "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
@@ -31,9 +34,9 @@ scalacOptions <++= scalaVersion map { v =>
 
 libraryDependencies ++= Seq(
   "org.fluentd" % "fluent-logger" % "0.2.7",
+  "org.msgpack" %% "msgpack-scala" % "0.6.6",
   "org.scalatest" %% "scalatest" % "1.8" % "test",
-  "junit" % "junit" % "4.10" % "test",
-  "org.fluentd" % "fluent-logger-scala_2.9.1" % "0.2.0"
+  "junit" % "junit" % "4.10" % "test"
 )
 
 pomExtra := (
