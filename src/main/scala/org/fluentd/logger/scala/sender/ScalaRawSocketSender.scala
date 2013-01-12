@@ -23,7 +23,6 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
   val reconnector = new ExponentialDelayReconnector()
   var socket:Socket = null;
   var out:BufferedOutputStream = null;
-  println("test1")
   open()
   
   def this(host:String, port:Int) {

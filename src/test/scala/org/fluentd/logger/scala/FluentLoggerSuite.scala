@@ -51,23 +51,66 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
     FluentLoggerFactory.closeAll
   }
   
-  test("test normal 2") {
+  test("test big hash map") {
     val logger0 = FluentLoggerFactory.getLogger("debug")
+    val data = new HashMap[String, String]();
     for (i <- 1 to 100) {
-      val data = new HashMap[String, Object]();
-      data.put("k3", "v3");
-      data.put("k4", "v4");
-      logger0.log("test01", data);
+      data.put("k"+i.toString, i.toString);
     }
+    logger0.log("test01", data);
     FluentLoggerFactory.flushAll
     FluentLoggerFactory.closeAll
   }
   
+  test("test sending lots List objects") {
+    val logger0 = FluentLoggerFactory.getLogger("debug")
+    val ev = new HashMap[String, List[String]]();
+    var list: List[String] = List();
+    for (i <- 1 to 100) {
+      list = i.toString::list
+      ev.put("key1", list)
+      logger0.log("test02", ev);
+    }
+    FluentLoggerFactory.flushAll
+    FluentLoggerFactory.closeAll
+  }
+ 
+  test("test sending big List object") {
+    val logger0 = FluentLoggerFactory.getLogger("debug")
+    val ev = new HashMap[String, List[String]]();
+    for (i <- 1 to 100) {
+      var list: List[String] = List();
+   	  for (j <- 1 to 100) {
+        list = j.toString::list
+      }
+      ev.put("key"+i.toString, list)
+    }
+    logger0.log("test03", ev);
+    FluentLoggerFactory.flushAll
+    FluentLoggerFactory.closeAll
+  }
+  
+  /*
+  test("test sending Set objects") {
+    val logger0 = FluentLoggerFactory.getLogger("debug")
+    val ev = new HashMap[String, Set[String]]();
+    for (i <- 1 to 100) {
+      var list: List[String] = List();
+   	  for (j <- 1 to 100) {
+        list = j.toString::list
+      }
+      ev.put("key"+i.toString, list.toSet)
+    }
+    logger0.log("test01", ev);
+    FluentLoggerFactory.flushAll
+    FluentLoggerFactory.closeAll
+  }
+  */
+
   test("close") {
     FluentLoggerFactory.getLogger("tag1");
     FluentLoggerFactory.getLogger("tag2");
     FluentLoggerFactory.getLogger("tag3");
     FluentLoggerFactory.closeAll
   }
-
 }
