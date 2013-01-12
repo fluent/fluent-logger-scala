@@ -27,11 +27,7 @@ object FluentLoggerFactory {
   implicit def wrap(logger: JavaFluentLogger): FluentLogger = new FluentLogger(logger)
   val senderPropertyName = JavaConstants.FLUENT_SENDER_CLASS
   val scalaSenderName = "RawSocketSender"
-  val senderClassName = 
-    if (System.getProperties().containsKey(senderPropertyName))
-      System.getProperty(senderPropertyName)
-    else 
-      scalaSenderName
+  val senderClassName = System.getProperty(senderPropertyName, scalaSenderName)
   val factory = new JavaFluentLoggerFactory()
   
   def getLogger(tag: String): FluentLogger = {
