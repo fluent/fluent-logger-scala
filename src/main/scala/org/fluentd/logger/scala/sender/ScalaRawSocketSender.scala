@@ -108,13 +108,8 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
 
     try {
       // serialize tag, timestamp and data
-      //val byte = ScalaMessagePack.write(event);
-      val b1 = ScalaMessagePack.write(event);
-      //val b2 = ScalaMessagePack.write(event.timestamp);
-      //val b3 = ScalaMessagePack.write(event.data);
-      // send serialized data
-      //return send(b1 ++ b2++ b3)
-      return send(b1)
+      val byte = ScalaMessagePack.write(List(event.key, event.timestamp, event.data))
+      return send(byte)
     } catch {
       case e: IOException =>
         LOG.severe("Cannot serialize event: " + event);
