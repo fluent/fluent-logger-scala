@@ -31,11 +31,12 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
   // TODO: fix to use mock.
   test("test normal 1"){
     val logger = FluentLoggerFactory.getLogger("debug")
-    val data1 = new HashMap[String, Object]();
+    val data1 = new HashMap[String, String]();
     data1.put("k1", "v1");
     data1.put("k2", "v2");
     logger.log("test01", data1);
-    val data2 = new HashMap[String, Object]();
+    
+    val data2 = new HashMap[String, String]();
     data2.put("k3", "v3");
     data2.put("k4", "v4");
     logger.log("test01", data2);

@@ -14,8 +14,8 @@ scalaVersion := "2.9.1"
 
 
 resolvers ++= Seq(
-  "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
-  "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases"
+  "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases",
+  "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 )
 
 scalaBinaryVersion <<= scalaBinaryVersion { v =>
@@ -36,7 +36,9 @@ libraryDependencies ++= Seq(
   "org.fluentd" % "fluent-logger" % "0.2.7",
   "org.msgpack" %% "msgpack-scala" % "0.6.6",
   "org.scalatest" %% "scalatest" % "1.8" % "test",
-  "junit" % "junit" % "4.10" % "test"
+  "junit" % "junit" % "4.10" % "test",
+  "org.slf4j" % "slf4j-api" % "1.6.4",
+  "org.slf4j" % "slf4j-simple" % "1.6.4"
 )
 
 pomExtra := (

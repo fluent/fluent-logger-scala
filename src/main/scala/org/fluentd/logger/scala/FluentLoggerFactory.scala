@@ -21,14 +21,17 @@ import scala.collection.JavaConversions._
 import org.fluentd.logger.{FluentLogger => JavaFluentLogger}
 import org.fluentd.logger.{FluentLoggerFactory => JavaFluentLoggerFactory}
 import org.fluentd.logger.{Constants => JavaConstants}
+import org.fluentd.logger.sender.RawSocketSender
+import scala.collection.mutable.WeakHashMap
+import org.fluentd.logger.scala.sender.ScalaRawSocketSender
 
 
 object FluentLoggerFactory {
-  implicit def wrap(logger: JavaFluentLogger): FluentLogger = new FluentLogger(logger)
   val senderPropertyName = JavaConstants.FLUENT_SENDER_CLASS
-  val scalaSenderName = "RawSocketSender"
+  val scalaSenderName = "ScalaRawSocketSender"
   val senderClassName = System.getProperty(senderPropertyName, scalaSenderName)
   val factory = new JavaFluentLoggerFactory()
+  val loggers: WeakHashMap[String, FluentLogger] = new WeakHashMap
   
   def getLogger(tag: String): FluentLogger = {
     getLogger(tag, "localhost", 24224)
@@ -40,10 +43,17 @@ object FluentLoggerFactory {
   
   def getLogger(tag: String, host: String, port: Int,
       timeout: Int, bufferCapacity: Int): FluentLogger = {
-    factory.getLogger(tag, host, port, timeout, bufferCapacity)
+    val sender = new ScalaRawSocketSender(host, port, timeout, bufferCapacity);
+    val logger = new FluentLogger(tag, sender);
+    loggers.put(tag, sender)
+    logger
   }
   
   def flushAll() = factory.flushAll()
   def closeAll() = factory.closeAll()
+  
+}
+
+class FluentLoggerFactory {
   
 }
