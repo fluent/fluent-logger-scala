@@ -4,8 +4,8 @@ import org.msgpack.annotation.Message
 import scala.collection.Map
 
 @Message
-class Event(k: String, ts: Long, d: Map[String, AnyRef]) {
+class Event(k: String, ts: Long, d: Map[String, Any]) {
   val key: String = k
   val timestamp: Long = ts
-  val data: Map[String, AnyRef] = d
+  val data: Map[String, Any] = d
 }

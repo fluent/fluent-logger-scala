@@ -30,22 +30,18 @@ Add sonatype repository and dependencies to build.sbt file as follows:
 
     resolvers += "Apache Maven Central Repository" at "http://repo.maven.apache.org/maven2/"
     
-    libraryDependencies += "org.fluentd" % "fluent-logger-scala_<scala_version>" % "0.2.0"
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_<scala_version>" % "0.3.0"
     
 
 Please replace <scala_version> with scala compiler version you use.
-Currently, <scala_version> can be replaced with 2.8.1, 2.8.2, 2.9.0, 2.9.1, 2.9.2.
+Currently, <scala_version> can be replaced with 2.9.0, 2.9.1.
 For instance,
 
-    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.8.1" % "0.2.0"
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.0" % "0.3.0"
 
 or
 
-    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.0" % "0.2.0"
-
-or
-
-    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.1" % "0.2.0"
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.1" % "0.3.0"
 
 or
 
@@ -73,9 +69,10 @@ APIs base on fluent-logger-java.
 * Add tests by using mocks
 * maven support
 
-## License
+## License and Copyright
 
-Apache License, Version 2.0
+* Copyright © 2011- Tsuyoshi Ozawa
+* Apache License, Version 2.0
 
 ## Misc
 

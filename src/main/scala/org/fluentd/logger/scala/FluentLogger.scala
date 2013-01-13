@@ -12,19 +12,19 @@ class FluentLogger(t :String, s: Sender) {
   val tag = t
   val sender = s
   
-  def log(label: String, key: String, value: AnyRef): Boolean = {
+  def log(label: String, key: String, value: Any): Boolean = {
     log(label, key, value, 0);
   }
   
-  def log(label: String, key: String, value: AnyRef, timestamp: Long): Boolean = {
+  def log(label: String, key: String, value: Any, timestamp: Long): Boolean = {
     log(label, Map(key -> value), timestamp);
   }
   
-  def log(label: String, data: Map[String, AnyRef]): Boolean = {
+  def log(label: String, data: Map[String, Any]): Boolean = {
     log(label, data, 0)
   }
   
-  def log(label: String, data: Map[String, AnyRef], timestamp: Long): Boolean = {
+  def log(label: String, data: Map[String, Any], timestamp: Long): Boolean = {
     sender.emit(tag, timestamp, data)
   }
   

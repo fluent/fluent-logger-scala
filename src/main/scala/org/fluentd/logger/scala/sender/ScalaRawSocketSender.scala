@@ -92,11 +92,11 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
 	}   
   }
 
-  def emit(tag: String, data: Map[String, AnyRef]): Boolean = {
+  def emit(tag: String, data: Map[String, Any]): Boolean = {
     emit(tag, System.currentTimeMillis() / 1000, data)
   }
 
-  def emit(tag: String, timestamp: Long, data: Map[String, AnyRef]): Boolean = {
+  def emit(tag: String, timestamp: Long, data: Map[String, Any]): Boolean = {
     emit(new Event(tag, timestamp, data));
   }
 
