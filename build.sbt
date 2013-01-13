@@ -2,20 +2,22 @@ organization := "org.fluentd"
 
 name := "fluent-logger-scala"
 
-version := "0.2.0"
+version := "0.3.0"
 
 publishMavenStyle := true
 
+crossScalaVersions := Seq("2.9.0", "2.9.1")
+
+// TODO: support 2.9.2 or later version.
 //crossScalaVersions := Seq("2.8.1", "2.8.2", "2.9.0", "2.9.1", "2.9.2") //, "2.10.0-RC2")
-//crossScalaVersions := Seq("2.9.1") //, "2.10.0-RC2")
 //crossVersion := CrossVersion.full
 
-scalaVersion := "2.9.1"
-
+scalaVersion := "2.9.0"
 
 resolvers ++= Seq(
   "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases",
-  "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
+  "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
+  "MessagePack For Scala Repository" at "http://takezoux2.github.com/maven"
 )
 
 scalaBinaryVersion <<= scalaBinaryVersion { v =>

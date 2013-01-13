@@ -11,7 +11,7 @@ Main difference between scala and java version is to support Scala Collection.
 
 ## Requirement
 
-* Scala Compiler 2.8.1, 2.9.0, 2.9.1, 2.9.2
+* Scala Compiler 2.9.0, 2.9.1
 * sbt(Simple Build Tool) 0.11.x
 * fluent-logger-java 0.2.6 or later
 
@@ -43,9 +43,6 @@ or
 
     libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.1" % "0.3.0"
 
-or
-
-    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.2" % "0.2.0"
 
 ## API
 
@@ -57,17 +54,17 @@ APIs base on fluent-logger-java.
     FluentLoggerFactory#flushAll(): Unit
     FluentLoggerFactory#closeAll(): Unit
 
-    FluentLogger#log(label: String, key: String, value: Object): Boolean
-    FluentLogger#log(label: String, key: String, value: Object, timestamp: Long): Boolean
-    FluentLogger#log(tag:String, mutableMap/immutableMap[String, Object]):Boolean
+    FluentLogger#log(label: String, key: String, value: Any): Boolean
+    FluentLogger#log(label: String, key: String, value: Any, timestamp: Long): Boolean
+    FluentLogger#log(tag:String, mutableMap/immutableMap[String, Any]):Boolean
     FluentLogger#flush()
     FluentLogger#close()
 
 
 ## TODOs
 
-* Add tests by using mocks
-* maven support
+* Set support(This is WIP).
+* Handling Java objects and Scala objects transparently.
 
 ## License and Copyright
 

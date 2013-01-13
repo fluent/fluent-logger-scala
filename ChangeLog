@@ -1,0 +1,12 @@
+Release 0.3.0. - 2013/1/13
+
+* Scala native class support(basic collections/options).
+
+Release 0.2.0 - 2012/11/12
+
+* Changed to use fluent-logger-java
+* Added tests.
+
+Release 0.1.0 - 2011/11/03
+
+* First version
