@@ -8,6 +8,7 @@ Many web/mobile applications generate huge amount of event logs (c,f. login, log
 **fluent-logger-scala** is a Scala library, to record the events from Scala application,  based on fluent-logger-java.
 Main difference between scala and java version is to support Scala Collection.
 
+Please see [QuickStart](https://github.com/oza/fluent-logger-scala/wiki/QuickStart) to get started!
 
 ## Requirement
 
