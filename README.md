@@ -12,7 +12,7 @@ Please see [QuickStart](https://github.com/oza/fluent-logger-scala/wiki/QuickSta
 
 ## Requirement
 
-* Scala Compiler 2.9.0, 2.9.1
+* Scala Compiler 2.9.0, 2.9.1, 2.9.2
 * sbt(Simple Build Tool) 0.11.x
 * fluent-logger-java 0.2.6 or later
 
@@ -35,7 +35,7 @@ Add sonatype repository and dependencies to build.sbt file as follows:
     
 
 Please replace <scala_version> with scala compiler version you use.
-Currently, <scala_version> can be replaced with 2.9.0, 2.9.1.
+Currently, <scala_version> can be replaced with 2.9.0, 2.9.1, 2.9.2.
 For instance,
 
     libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.0" % "0.3.0"
@@ -43,6 +43,11 @@ For instance,
 or
 
     libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.1" % "0.3.0"
+
+or
+
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.2" % "0.3.0"
+
 
 
 ## API

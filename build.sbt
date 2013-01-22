@@ -6,7 +6,7 @@ version := "0.3.0"
 
 publishMavenStyle := true
 
-crossScalaVersions := Seq("2.9.0", "2.9.1")
+crossScalaVersions := Seq("2.9.0", "2.9.1", "2.9.2")
 
 // TODO: support 2.9.2 or later version.
 //crossScalaVersions := Seq("2.8.1", "2.8.2", "2.9.0", "2.9.1", "2.9.2") //, "2.10.0-RC2")
@@ -36,12 +36,19 @@ scalacOptions <++= scalaVersion map { v =>
 
 libraryDependencies ++= Seq(
   "org.fluentd" % "fluent-logger" % "0.2.7",
-  "org.msgpack" %% "msgpack-scala" % "0.6.6",
   "org.scalatest" %% "scalatest" % "1.8" % "test",
   "junit" % "junit" % "4.10" % "test",
   "org.slf4j" % "slf4j-api" % "1.6.4",
   "org.slf4j" % "slf4j-simple" % "1.6.4"
 )
+
+libraryDependencies <++=  scalaVersion { sv =>
+  if (sv.startsWith("2.9.2"))
+    Seq("org.msgpack" % "msgpack-scala_2.9.1" % "0.6.6")
+  else
+    Seq("org.msgpack" %% "msgpack-scala" % "0.6.6")
+}
+
 
 pomExtra := (
   <url>https://github.com/oza/fluent-logger-scala</url>
