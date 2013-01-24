@@ -13,7 +13,7 @@ Please see [QuickStart](https://github.com/oza/fluent-logger-scala/wiki/QuickSta
 ## Requirement
 
 * Scala Compiler 2.9.0, 2.9.1, 2.9.2
-* sbt(Simple Build Tool) 0.11.x
+* sbt(Simple Build Tool) 0.12.x
 * fluent-logger-java 0.2.6 or later
 
 ## Build
