@@ -100,6 +100,17 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
     ev.put("inner", innerMap)
     logger0.log("test04", ev)
   }
+  
+  test("test sending nested Map[String, Int] object") {
+    val logger0 = FluentLoggerFactory.getLogger("debug")
+    val ev = new HashMap[String, HashMap[String, Int]]();
+    var innerMap = HashMap[String, Int]()
+    for (i <- 1 to 100) {
+      innerMap.put(i.toString, i)
+    }
+    ev.put("inner", innerMap)
+    logger0.log("test05", ev)
+  }
    /*
   test("test sending Set objects") {
     val logger0 = FluentLoggerFactory.getLogger("debug")
