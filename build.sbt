@@ -39,7 +39,9 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "1.8" % "test",
   "junit" % "junit" % "4.10" % "test",
   "org.slf4j" % "slf4j-api" % "1.6.4",
-  "org.slf4j" % "slf4j-simple" % "1.6.4"
+  "org.slf4j" % "slf4j-api" % "1.6.4",
+  "org.slf4j" % "slf4j-simple" % "1.6.4",
+  "org.msgpack" % "msgpack" % "0.6.7"
 )
 
 libraryDependencies <++=  scalaVersion { sv =>
