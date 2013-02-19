@@ -1,7 +1,6 @@
 package org.fluentd.logger.scala.sender
 
 import org.fluentd.logger.sender.RawSocketSender
-import org.msgpack.ScalaMessagePack
 import java.nio.ByteBuffer
 import java.net.InetSocketAddress
 import org.fluentd.logger.sender.ExponentialDelayReconnector
@@ -9,9 +8,13 @@ import java.io.IOException
 import java.net.Socket
 import java.io.BufferedOutputStream
 import scala.collection.Map
+import net.liftweb.json._
+import net.liftweb.json.Serialization
+import net.liftweb.json.JsonParser._
 
 class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int) 
     extends Sender {
+  implicit val formats = DefaultFormats + EventSerializer + MapSerializer
   val LOG = java.util.logging.Logger.getLogger("ScalaRawSocketSender");
   val host = h
   val port = p
@@ -107,8 +110,10 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
 
     try {
       // serialize tag, timestamp and data
-      val byte = ScalaMessagePack.write(List(event.key, event.timestamp, event.data))
-      return send(byte)
+      val json = Serialization.write(event)
+      //println(json)
+      send(json.getBytes("UTF-8"))
+      return true
     } catch {
       case e: IOException =>
         LOG.severe("Cannot serialize event: " + event);

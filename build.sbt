@@ -2,13 +2,13 @@ organization := "org.fluentd"
 
 name := "fluent-logger-scala"
 
-version := "0.3.0"
+version := "0.4.0"
 
 publishMavenStyle := true
 
-crossScalaVersions := Seq("2.9.0", "2.9.1", "2.9.2")
+crossScalaVersions := Seq("2.9.0", "2.9.1", "2.9.2", "2.10.0")
 
-scalaVersion := "2.9.0"
+scalaVersion := "2.10.0"
 
 resolvers ++= Seq(
   "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases",
@@ -25,17 +25,18 @@ scalacOptions <++= scalaVersion map { v =>
 
 libraryDependencies ++= Seq(
   "org.fluentd" % "fluent-logger" % "0.2.8",
-  "org.scalatest" %% "scalatest" % "1.8" % "test",
   "junit" % "junit" % "4.10" % "test",
   "org.slf4j" % "slf4j-api" % "1.6.4",
   "org.slf4j" % "slf4j-simple" % "1.6.4"
 )
 
 libraryDependencies <++=  scalaVersion { sv =>
-  if (sv.startsWith("2.9.0"))
-    Seq("org.msgpack" % "msgpack-scala_2.9.1" % "0.6.7")
-  else
-    Seq("org.msgpack" %% "msgpack-scala" % "0.6.7")
+  if (sv.startsWith("2.9.0") || sv.startsWith("2.9.1"))
+    Seq("net.liftweb" %% "lift-json" % "2.4",
+        "org.scalatest" %% "scalatest" % "1.8" % "test")
+  else //(sv.startsWith("2.10"))
+    Seq("net.liftweb" %% "lift-json" % "2.5-M4",
+        "org.scalatest" %% "scalatest" % "1.9.1" % "test")
 }
 
 
