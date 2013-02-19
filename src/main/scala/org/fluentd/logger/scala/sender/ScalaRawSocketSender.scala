@@ -111,7 +111,6 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
     try {
       // serialize tag, timestamp and data
       val json = Serialization.write(event)
-      //println(json)
       send(json.getBytes("UTF-8"))
       return true
     } catch {
