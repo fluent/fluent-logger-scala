@@ -140,6 +140,24 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
     FluentLoggerFactory.flushAll
     FluentLoggerFactory.closeAll
   }
+  
+  test("test more nested objects") {
+    val logger0 = FluentLoggerFactory.getLogger("debug")
+    val parent = new HashMap[String, HashMap[String, Set[Int]]]();
+    val ev = new HashMap[String, Set[Int]]();
+    for (i <- 1 to 100) {
+      var list: List[Int] = List();
+   	  for (j <- 1 to 100) {
+        list = j::list
+      }
+      ev.put("key"+i.toString, list.toSet)
+    }
+    
+    parent.put("key1", ev)
+    logger0.log("test01", parent);
+    FluentLoggerFactory.flushAll
+    FluentLoggerFactory.closeAll
+  }
 
   test("close") {
     FluentLoggerFactory.getLogger("tag1");
