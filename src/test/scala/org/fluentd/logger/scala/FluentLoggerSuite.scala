@@ -22,11 +22,22 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.FunSuite
 import org.scalatest.BeforeAndAfter
-import org.fluentd.logger.util.MockFluentd;
 import scala.collection.mutable.HashMap
+import org.fluentd.logger.scala.util.MockFluentd
+import org.fluentd.logger.scala.util.Verifier
+import org.fluentd.logger.scala.sender.Event
+import org.fluentd.logger.scala.util.MockFluentdFactory
+import net.liftweb.json.JsonAST.JValue
+import net.liftweb.json.JsonParser
+import net.liftweb.json.Serialization
+import net.liftweb.json.NoTypeHints
+import org.fluentd.logger.scala.sender.EventSerializer
+import org.fluentd.logger.scala.sender.MapSerializer
+import java.util.ArrayList
 
 @RunWith(classOf[JUnitRunner])
 class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
+  implicit val formats = Serialization.formats(NoTypeHints) + EventSerializer + MapSerializer
   
   // TODO: fix to use mock.
   test("test normal 1"){
@@ -34,18 +45,21 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
     val data1 = new HashMap[String, String]();
     data1.put("k1", "v1");
     data1.put("k2", "v2");
-    logger.log("test01", data1);
+    logger.log("test01", data1)
     
     val data2 = new HashMap[String, String]();
+    val ts2 = System.currentTimeMillis
     data2.put("k3", "v3");
     data2.put("k4", "v4");
     logger.log("test01", data2);
-    logger.log("test01", data2, System.currentTimeMillis);
+    logger.log("test01", data2, ts2);
+    
     val data3 = data2.toMap
+    val ts3 = System.currentTimeMillis
     logger.log("test01", data3);
     logger.log("test01", data3, System.currentTimeMillis);
     logger.log("test01", "foo", "bar");
-    logger.log("test01", "foo", "bar", System.currentTimeMillis);
+    logger.log("test01", "foo", "bar", ts3);
     
     FluentLoggerFactory.flushAll
     FluentLoggerFactory.closeAll
@@ -111,14 +125,14 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
     ev.put("inner", innerMap)
     logger0.log("test05", ev)
   }
-   /*
+  
   test("test sending Set objects") {
     val logger0 = FluentLoggerFactory.getLogger("debug")
-    val ev = new HashMap[String, Set[String]]();
+    val ev = new HashMap[String, Set[Int]]();
     for (i <- 1 to 100) {
-      var list: List[String] = List();
+      var list: List[Int] = List();
    	  for (j <- 1 to 100) {
-        list = j.toString::list
+        list = j::list
       }
       ev.put("key"+i.toString, list.toSet)
     }
@@ -126,7 +140,6 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
     FluentLoggerFactory.flushAll
     FluentLoggerFactory.closeAll
   }
-  */
 
   test("close") {
     FluentLoggerFactory.getLogger("tag1");

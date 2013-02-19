@@ -8,9 +8,7 @@ import org.fluentd.logger.scala.sender.Sender
 import org.fluentd.logger.scala.sender.ScalaRawSocketSender
 import scala.collection.Map;
 
-class FluentLogger(t :String, s: Sender) {
-  val tag = t
-  val sender = s
+case class FluentLogger(tag :String, sender: Sender) {
   
   def log(label: String, key: String, value: Any): Boolean = {
     log(label, key, value, 0);
@@ -25,10 +23,10 @@ class FluentLogger(t :String, s: Sender) {
   }
   
   def log(label: String, data: Map[String, Any], timestamp: Long): Boolean = {
-    sender.emit(tag, timestamp, data)
+    sender.emit(tag, timestamp, data.toMap)
   }
   
-  def flush() = sender.flush()
+  def flush() = sender.flush() 
   
   def close() = sender.close()
   
