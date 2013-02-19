@@ -23,7 +23,10 @@ case class FluentLogger(tag :String, sender: Sender) {
   }
   
   def log(label: String, data: Map[String, Any], timestamp: Long): Boolean = {
-    sender.emit(tag, timestamp, data.toMap)
+    if (timestamp != 0)
+      sender.emit(tag + "." + label, timestamp, data.toMap)
+    else 
+      sender.emit(tag + "." + label, data.toMap)
   }
   
   def flush() = sender.flush() 
