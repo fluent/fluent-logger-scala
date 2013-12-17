@@ -2,13 +2,13 @@ organization := "org.fluentd"
 
 name := "fluent-logger-scala"
 
-version := "0.4.0"
+version := "0.5-SNAPSHOT"
 
 publishMavenStyle := true
 
-crossScalaVersions := Seq("2.9.0", "2.9.1", "2.9.2", "2.10.0")
+crossScalaVersions := Seq("2.9.0", "2.9.1", "2.9.2", "2.10.0", "2.10.3")
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.10.3"
 
 resolvers ++= Seq(
   "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases",
@@ -27,7 +27,8 @@ libraryDependencies ++= Seq(
   "org.fluentd" % "fluent-logger" % "0.2.8",
   "junit" % "junit" % "4.10" % "test",
   "org.slf4j" % "slf4j-api" % "1.6.4",
-  "org.slf4j" % "slf4j-simple" % "1.6.4" % "test"
+  "org.slf4j" % "slf4j-simple" % "1.6.4" % "test",
+  "org.xerial" % "fluentd-standalone" % "0.1"
 )
 
 libraryDependencies <++=  scalaVersion { sv =>
