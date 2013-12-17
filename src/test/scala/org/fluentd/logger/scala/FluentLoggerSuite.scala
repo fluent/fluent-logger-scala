@@ -27,6 +27,8 @@ import net.liftweb.json.NoTypeHints
 import org.fluentd.logger.scala.sender.EventSerializer
 import org.fluentd.logger.scala.sender.MapSerializer
 import xerial.fluentd.FluentdStandalone
+import java.net.Socket
+import java.io.IOException
 
 @RunWith(classOf[JUnitRunner])
 class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
@@ -38,21 +40,18 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
   override def beforeAll {
     // Start local fluentd server
     fluentd = Some(FluentdStandalone.start())
-    Thread.sleep(1000)
+    val port = fluentd.get.port
     logger = fluentd.map(fd => FluentLoggerFactory.getLogger("debug", "localhost", fd.port)).getOrElse {
       fail("Failed to start fluentd")
     }
   }
 
   override def afterAll {
-    // Wait for a while so that fluentd can process received messages
-    Thread.sleep(2000)
     // Terminate the fluentd server, if started
     fluentd.map { _.stop }
   }
 
 
-  // TODO: fix to use mock.
   test("test normal 1"){
     val data1 = new HashMap[String, String]()
     data1.put("k1", "v1")

@@ -35,7 +35,7 @@ libraryDependencies ++= Seq(
   "junit" % "junit" % "4.10" % "test",
   "org.slf4j" % "slf4j-api" % "1.6.4",
   "org.slf4j" % "slf4j-simple" % "1.6.4" % "test",
-  "org.xerial" % "fluentd-standalone" % "0.1"
+  "org.xerial" % "fluentd-standalone" % "0.1.1"
 )
 
 libraryDependencies <++=  scalaVersion { sv =>
