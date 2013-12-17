@@ -6,3 +6,5 @@ project/target/
 .cache
 *.swp
 *~
+.idea
+.idea_modules
