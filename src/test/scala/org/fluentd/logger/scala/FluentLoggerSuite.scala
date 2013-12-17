@@ -20,7 +20,7 @@ package org.fluentd.logger.scala
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{Tag, FunSuite, BeforeAndAfter}
+import org.scalatest.{BeforeAndAfterAll, Tag, FunSuite, BeforeAndAfter}
 import scala.collection.mutable.HashMap
 import net.liftweb.json.Serialization
 import net.liftweb.json.NoTypeHints
@@ -29,13 +29,13 @@ import org.fluentd.logger.scala.sender.MapSerializer
 import xerial.fluentd.FluentdStandalone
 
 @RunWith(classOf[JUnitRunner])
-class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
+class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
   implicit val formats = Serialization.formats(NoTypeHints) + EventSerializer + MapSerializer
 
   var fluentd : Option[FluentdStandalone] = None
   var logger : FluentLogger = null
 
-  before {
+  override def beforeAll {
     // Start local fluentd server
     fluentd = Some(FluentdStandalone.start())
     Thread.sleep(1000)
@@ -44,7 +44,7 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
     }
   }
 
-  after {
+  override def afterAll {
     // Terminate the fluentd server, if started
     fluentd.map { _.stop }
   }

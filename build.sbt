@@ -25,6 +25,11 @@ scalacOptions <++= scalaVersion map { v =>
     Seq("-deprecation")
 }
 
+
+
+logBuffered in Test := false
+
+
 libraryDependencies ++= Seq(
   "org.fluentd" % "fluent-logger" % "0.2.8",
   "junit" % "junit" % "4.10" % "test",
