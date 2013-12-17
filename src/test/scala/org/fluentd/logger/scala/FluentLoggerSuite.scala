@@ -45,6 +45,8 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
   }
 
   override def afterAll {
+    // Wait for a while so that fluentd can process received messages
+    Thread.sleep(2000)
     // Terminate the fluentd server, if started
     fluentd.map { _.stop }
   }
