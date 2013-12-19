@@ -7,11 +7,22 @@
 
 package fluent.logger
 
+import scala.reflect.ClassTag
+
 object FluentLogger {
 
-  def getLogger(tag:String) : TaggedFluentLogger = NA
+  /**
+   * Get a tagged logger
+   * @param tag
+   * @return
+   */
+  def apply(tag:String) : TaggedFluentLogger = NA
 
+  def apply(tag:String, cls:Class[_]) = {
+    NA
+  }
 
+  def of[A:ClassTag] : Logger = NA
 
 
   /**
@@ -36,12 +47,10 @@ trait FluentLogger {
   def log[A](tag:String, record:A) : Boolean = log(tag, currentTime, record)
   def log[K, V](tag:String, map:Map[K, V]) : Boolean = log(tag, currentTime, map)
   def json(tag:String, jsonObj:String) : Boolean = json(tag, currentTime, jsonObj)
-  def msgpack(tag:String, msgpackRecord:Array[Byte]) : Boolean = msgpack(tag, currentTime, msgpackRecord)
 
   def log[A](tag:String, timeStamp:Long, record:A) : Boolean
   def log[K, V](tag:String, timeStamp:Long, map:Map[K, V]) : Boolean
   def json(tag:String, timeStamp:Long, jsonObj:String) : Boolean
-  def msgpack(tag:String, timeStamp:Long, msgpackRecord:Array[Byte]) : Boolean
 
 }
 
@@ -54,28 +63,11 @@ trait TaggedFluentLogger extends FluentLogger {
 
   def log[A](record:A) : Boolean = log(tag, currentTime, record)
   def log[K, V](map:Map[K, V]) : Boolean = log(tag, currentTime, map)
-  def json(jsonRecord:String) : Boolean = json(tag, currentTime, jsonRecord)
+  def logJson(jsonObj:String) : Boolean = json(tag, currentTime, jsonObj)
 
   def log[A](timeStamp:Long, record:A) : Boolean = log(tag, timeStamp, record)
   def log[K, V](timeStamp:Long, map:Map[K, V]) : Boolean = log(tag, currentTime, map)
-  def json(timeStamp:Long, jsonObj:String) : Boolean = json(tag, timeStamp, jsonObj)
-
-}
-
-
-/**
- * Add logging features to the class extending this trait
- */
-trait Logging {
-
-  protected def tag : String = "log"
-
-  protected def fatal(message:String) : Unit
-  protected def error(message:String) : Unit
-  protected def warn(message:String) : Unit
-  protected def info(message:String) : Unit
-  protected def debug(message:String) : Unit
-  protected def trace(message:String) : Unit
+  def logJson(timeStamp:Long, jsonObj:String) : Boolean = json(tag, timeStamp, jsonObj)
 
 }
 

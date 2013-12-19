@@ -11,11 +11,16 @@ import fluent.FluentSpec
 
 object FluentLoggerTest {
 
-//  class Sample extends Logging {
-//
-//  }
+  class Sample {
 
+  }
+
+  class Sample2 extends Logging {
+
+  }
 }
+
+import FluentLoggerTest._
 
 
 /**
@@ -27,7 +32,8 @@ class FluentLoggerTest extends FluentSpec {
 
     "have factory methods" in {
 
-      FluentLogger.getLogger("log")
+      FluentLogger("log")
+      FluentLogger.of[Sample]
 
 
     }
