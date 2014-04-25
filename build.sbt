@@ -6,7 +6,7 @@ version := "0.5-SNAPSHOT"
 
 publishMavenStyle := true
 
-crossScalaVersions := Seq("2.9.0", "2.9.1", "2.9.2", "2.10.0", "2.10.3", "2.10.4", "2.11.0")
+crossScalaVersions := Seq("2.9.0", "2.9.1", "2.9.2", "2.10.4", "2.11.0")
 
 val SCALA_VERSION = "2.11.0"
 
