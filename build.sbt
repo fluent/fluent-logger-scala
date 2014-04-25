@@ -39,11 +39,14 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies <++=  scalaVersion { sv =>
-  if (sv.startsWith("2.9.0") || sv.startsWith("2.9.1"))
-    Seq("net.liftweb" %% "lift-json" % "2.4",
-        "org.scalatest" %% "scalatest" % "1.8" % "test")
+  if (sv.startsWith("2.9.0"))
+    Seq("org.json4s" %% "json4s-native" % "3.2.5",
+        "org.scalatest" %% "scalatest" % "1.9.2" % "test")
+  else if (sv.startsWith("2.9.1") || sv.startsWith("2.9.2"))
+    Seq("org.json4s" %% "json4s-native" % "3.2.8",
+        "org.scalatest" %% "scalatest" % "1.9.2" % "test")
   else //(sv.startsWith("2.10"))
-    Seq("net.liftweb" %% "lift-json" % "2.5-M4" exclude("org.specs2","specs2_2.10"),
+    Seq("org.json4s" %% "json4s-native" % "3.2.8",
         "org.scalatest" %% "scalatest" % "2.1.3" % "test",
         "org.scala-lang" % "scala-actors" % "2.10.3" % "test")
 }

@@ -8,9 +8,8 @@ import java.io.IOException
 import java.net.Socket
 import java.io.BufferedOutputStream
 import scala.collection.Map
-import net.liftweb.json._
-import net.liftweb.json.Serialization
-import net.liftweb.json.JsonParser._
+import org.json4s._
+import org.json4s.native.Serialization
 
 class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int) 
     extends Sender {

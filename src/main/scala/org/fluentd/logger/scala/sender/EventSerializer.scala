@@ -1,17 +1,17 @@
 package org.fluentd.logger.scala.sender
 
-import net.liftweb.json.Serializer
-import net.liftweb.json.Formats
-import net.liftweb.json.JsonAST.JObject
-import net.liftweb.json.JsonAST.JField
-import net.liftweb.json.Extraction
-import net.liftweb.json.JsonAST.JValue
-import net.liftweb.json.TypeInfo
-import net.liftweb.json.JsonAST.JArray
-import net.liftweb.json.JsonAST.JInt
-import net.liftweb.json.JsonAST.JString
-import net.liftweb.json.JsonAST.JNothing
-import net.liftweb.json.MappingException
+import org.json4s.Serializer
+import org.json4s.Formats
+import org.json4s.JsonAST.JObject
+import org.json4s.JsonAST.JField
+import org.json4s.Extraction
+import org.json4s.JsonAST.JValue
+import org.json4s.TypeInfo
+import org.json4s.JsonAST.JArray
+import org.json4s.JsonAST.JInt
+import org.json4s.JsonAST.JString
+import org.json4s.JsonAST.JNothing
+import org.json4s.MappingException
 
 object EventSerializer extends Serializer[Event] {
   private val EventClass = classOf[Event]
