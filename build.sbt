@@ -31,10 +31,10 @@ logBuffered in Test := false
 
 
 libraryDependencies ++= Seq(
-  "org.fluentd" % "fluent-logger" % "0.2.8",
-  "junit" % "junit" % "4.10" % "test",
-  "org.slf4j" % "slf4j-api" % "1.6.4",
-  "org.slf4j" % "slf4j-simple" % "1.6.4" % "test",
+  "org.fluentd" % "fluent-logger" % "0.2.11",
+  "junit" % "junit" % "4.11" % "test",
+  "org.slf4j" % "slf4j-api" % "1.7.7",
+  "org.slf4j" % "slf4j-simple" % "1.7.7" % "test",
   "org.xerial" % "fluentd-standalone" % "0.1.2"
 )
 
@@ -44,7 +44,8 @@ libraryDependencies <++=  scalaVersion { sv =>
         "org.scalatest" %% "scalatest" % "1.8" % "test")
   else //(sv.startsWith("2.10"))
     Seq("net.liftweb" %% "lift-json" % "2.5-M4" exclude("org.specs2","specs2_2.10"),
-        "org.scalatest" %% "scalatest" % "1.9.1" % "test")
+        "org.scalatest" %% "scalatest" % "2.1.3" % "test",
+        "org.scala-lang" % "scala-actors" % "2.10.3" % "test")
 }
 
 
