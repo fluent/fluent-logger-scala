@@ -6,9 +6,9 @@ version := "0.5-SNAPSHOT"
 
 publishMavenStyle := true
 
-crossScalaVersions := Seq("2.9.0", "2.9.1", "2.9.2", "2.10.0", "2.10.3")
+crossScalaVersions := Seq("2.9.0", "2.9.1", "2.9.2", "2.10.4", "2.11.0")
 
-val SCALA_VERSION = "2.10.3"
+val SCALA_VERSION = "2.11.0"
 
 scalaVersion := SCALA_VERSION
 
@@ -31,20 +31,28 @@ logBuffered in Test := false
 
 
 libraryDependencies ++= Seq(
-  "org.fluentd" % "fluent-logger" % "0.2.8",
-  "junit" % "junit" % "4.10" % "test",
-  "org.slf4j" % "slf4j-api" % "1.6.4",
-  "org.slf4j" % "slf4j-simple" % "1.6.4" % "test",
+  "org.fluentd" % "fluent-logger" % "0.2.11",
+  "junit" % "junit" % "4.11" % "test",
+  "org.slf4j" % "slf4j-api" % "1.7.7",
+  "org.slf4j" % "slf4j-simple" % "1.7.7" % "test",
   "org.xerial" % "fluentd-standalone" % "0.1.2"
 )
 
 libraryDependencies <++=  scalaVersion { sv =>
-  if (sv.startsWith("2.9.0") || sv.startsWith("2.9.1"))
-    Seq("net.liftweb" %% "lift-json" % "2.4",
-        "org.scalatest" %% "scalatest" % "1.8" % "test")
-  else //(sv.startsWith("2.10"))
-    Seq("net.liftweb" %% "lift-json" % "2.5-M4" exclude("org.specs2","specs2_2.10"),
-        "org.scalatest" %% "scalatest" % "1.9.1" % "test")
+  if (sv.startsWith("2.9.0"))
+    Seq("org.json4s" %% "json4s-native" % "3.2.5",
+        "org.scalatest" %% "scalatest" % "1.9.2" % "test")
+  else if (sv.startsWith("2.9.1") || sv.startsWith("2.9.2"))
+    Seq("org.json4s" %% "json4s-native" % "3.2.8",
+        "org.scalatest" %% "scalatest" % "1.9.2" % "test")
+  else if (sv.startsWith("2.10"))
+    Seq("org.json4s" %% "json4s-native" % "3.2.9",
+        "org.scalatest" %% "scalatest" % "2.1.3" % "test",
+        "org.scala-lang" % "scala-actors" % "2.10.4" % "test")
+  else //(sv.startsWith("2.11"))
+    Seq("org.json4s" %% "json4s-native" % "3.2.9",
+        "org.scalatest" %% "scalatest" % "2.1.3" % "test",
+        "org.scala-lang" % "scala-actors" % "2.11.0" % "test")
 }
 
 
