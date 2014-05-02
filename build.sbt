@@ -2,11 +2,11 @@ organization := "org.fluentd"
 
 name := "fluent-logger-scala"
 
-version := "0.5-SNAPSHOT"
+version := "0.5.0"
 
 publishMavenStyle := true
 
-crossScalaVersions := Seq("2.9.0", "2.9.1", "2.9.2", "2.10.4", "2.11.0")
+crossScalaVersions := Seq("2.10.4", "2.11.0")
 
 val SCALA_VERSION = "2.11.0"
 
@@ -39,13 +39,7 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies <++=  scalaVersion { sv =>
-  if (sv.startsWith("2.9.0"))
-    Seq("org.json4s" %% "json4s-native" % "3.2.5",
-        "org.scalatest" %% "scalatest" % "1.9.2" % "test")
-  else if (sv.startsWith("2.9.1") || sv.startsWith("2.9.2"))
-    Seq("org.json4s" %% "json4s-native" % "3.2.8",
-        "org.scalatest" %% "scalatest" % "1.9.2" % "test")
-  else if (sv.startsWith("2.10"))
+  if (sv.startsWith("2.10"))
     Seq("org.json4s" %% "json4s-native" % "3.2.9",
         "org.scalatest" %% "scalatest" % "2.1.3" % "test",
         "org.scala-lang" % "scala-actors" % "2.10.4" % "test")
