@@ -69,6 +69,11 @@ pomExtra := (
       <name>Tsuyoshi Ozawa</name>
       <url>https://github.com/oza</url>
     </developer>
+    <developer>
+      <id>xerial</id>
+      <name>Taro L. Saito</name>
+      <url>https://github.com/xerial</url>
+    </developer>
   </developers>
 )
 
