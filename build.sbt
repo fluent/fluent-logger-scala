@@ -78,7 +78,7 @@ pomExtra := (
 )
 
 publishTo <<= version { v =>
-  val nexus = "http://oss.sonatype.org/"
+  val nexus = "https://oss.sonatype.org/"
   if (v.endsWith("-SNAPSHOT"))
     Some("snapshots" at nexus+"content/repositories/snapshots")
   else
