@@ -74,6 +74,13 @@ APIs base on fluent-logger-java.
 
     ./sbt test
 
+## For developers
+
+### Publishing to sonatype repository
+
+    ./sbt publishSigned
+    ./sbt sonatypeRelease
+
 
 ## TODOs
 
