@@ -1,8 +1,11 @@
 language: scala
 scala:
-  - 2.10.3
+  - 2.10.4
+  - 2.11.0
 
 script: sbt ++$TRAVIS_SCALA_VERSION test -Dloglevel=debug
+
+before_install: gem install fluentd
 
 jdk:
  - openjdk7
@@ -12,3 +15,8 @@ branches:
   only:
     - master
     - develop
+
+notifications:
+  email:
+    - leo@xerial.org
+    - ozawa.tsuyoshi@gmail.com

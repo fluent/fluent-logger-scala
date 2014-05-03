@@ -10,36 +10,29 @@ Main difference between scala and java version is to support Scala Collection.
 
 Please see [QuickStart](https://github.com/oza/fluent-logger-scala/wiki/QuickStart) to get started!
 
-## Requirement
-
-* Scala Compiler 2.9.0, 2.9.1, 2.9.2, 2.10.0
-* sbt(Simple Build Tool) 0.12.x
-
-## Build
-
-    sbt update
-    sbt compile
-
-## Test
-
-    sbt test
-
-## Installation
+## Installation(for scala 2.10.0 or later)
 
 Add sonatype repository and dependencies to build.sbt file as follows:
 
     resolvers += "Apache Maven Central Repository" at "http://repo.maven.apache.org/maven2/"
     
-    libraryDependencies += "org.fluentd" % "fluent-logger-scala_<scala_version>" % "0.4.0"
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_<scala_version>" % "0.5.0"
     
 
 Please replace <scala_version> with scala compiler version you use.
-Currently, <scala_version> can be replaced with 2.9.0, 2.9.1, 2.9.2, 2.10.
+Currently, <scala_version> can be replaced with 2.10 or 2.11.
 For instance,
 
-    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.10" % "0.4.0"
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.10" % "0.5.0"
 
 or
+
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.11" % "0.5.0"
+
+## Installation(for scala 2.9)
+
+We provide old version of fluent-logger-scala for scala 2.9.
+
 
     libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.9.0" % "0.4.0"
 
@@ -68,6 +61,18 @@ APIs base on fluent-logger-java.
     FluentLogger#log(tag:String, mutableMap/immutableMap[String, Any]):Boolean
     FluentLogger#flush()
     FluentLogger#close()
+
+## How to Build from source
+
+
+## Build
+
+    ./sbt update
+    ./sbt compile
+
+## Test
+
+    ./sbt test
 
 
 ## TODOs

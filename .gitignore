@@ -5,3 +5,6 @@ project/target/
 .classpath
 .cache
 *.swp
+*~
+.idea
+.idea_modules
