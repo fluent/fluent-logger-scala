@@ -19,8 +19,8 @@ Add sonatype repository and dependencies to build.sbt file as follows:
     libraryDependencies += "org.fluentd" % "fluent-logger-scala_<scala_version>" % "0.5.0"
     
 
-Please replace <scala_version> with scala compiler version you use.
-Currently, <scala_version> can be replaced with 2.10 or 2.11.
+Please replace ```<scala_version>``` with scala compiler version you use.
+Currently, ```<scala_version>``` can be replaced with 2.10 or 2.11.
 For instance,
 
     libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.10" % "0.5.0"
