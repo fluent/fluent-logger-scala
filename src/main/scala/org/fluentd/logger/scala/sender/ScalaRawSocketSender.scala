@@ -61,10 +61,10 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
     }
   }
   
-  def reconnect() {
+  def reconnect(forceReconnect: Boolean) {
     if (socket == null) {
       connect();
-    } else if (socket.isClosed() || (!socket.isConnected())) {
+    } else if (forceReconnect || socket.isClosed() || (!socket.isConnected())) {
       close();
       connect();
     }
@@ -155,7 +155,7 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
   def flush() = synchronized {
     try {
       // check whether connection is established or not
-      reconnect();
+      reconnect(!reconnector.isErrorHistoryEmpty);
       // write data
       out.write(getBuffer());
       out.flush();
@@ -163,6 +163,7 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
     } catch  {
       case e: IOException =>
         LOG.throwing(this.getClass().getName(), "flush", e);
+        reconnector.addErrorHistory(System.currentTimeMillis());
     }
   }
 
