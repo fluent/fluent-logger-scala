@@ -39,7 +39,10 @@ case class FluentLogger(tag :String, sender: Sender) {
   
   def flush() = sender.flush() 
   
-  def close() = sender.close()
+  def close() = {
+    flush()
+    sender.close()
+  }
   
   def getName: String = sender.getName()
   
