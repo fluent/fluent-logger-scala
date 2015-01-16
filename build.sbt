@@ -1,8 +1,12 @@
+import SonatypeKeys._
+
+sonatypeSettings
+
 organization := "org.fluentd"
 
 name := "fluent-logger-scala"
 
-version := "0.5.0"
+version := "0.5.1-SNAPSHOT"
 
 publishMavenStyle := true
 
@@ -24,7 +28,6 @@ scalacOptions <++= scalaVersion map { v =>
   else
     Seq("-deprecation")
 }
-
 
 
 logBuffered in Test := false
@@ -76,14 +79,6 @@ pomExtra := (
     </developer>
   </developers>
 )
-
-publishTo <<= version { v =>
-  val nexus = "https://oss.sonatype.org/"
-  if (v.endsWith("-SNAPSHOT"))
-    Some("snapshots" at nexus+"content/repositories/snapshots")
-  else
-    Some("releases" at nexus+"service/local/staging/deploy/maven2")
-}
 
 credentials ++= {
   val sonatype = ("Sonatype Nexus Repository Manager", "oss.sonatype.org")

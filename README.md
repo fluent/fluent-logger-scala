@@ -74,6 +74,27 @@ APIs base on fluent-logger-java.
 
     ./sbt test
 
+## For developers
+
+### Publishing to sonatype repository
+
+Describe your account information in $HOME/.sbt/(sbt-version)/sonatype.sbt file:
+
+    credentials += Credentials("Sonatype Nexus Repository Manager",
+        "oss.sonatype.org",
+        "(Sonatype user name)",
+        "(Sonatype password)")
+
+Then publish a signed artifact to the Sonatype repository:
+
+    ./sbt publishSigned
+
+Make sure you are using a release version in build.sbt file. A SNAPSHOT version is deployed to the snapshot repostitory of Sonatype, which is not synched with Maven central. 
+
+After publishing, you can close, promote and drop the published repositorty with sonatypeRelease command:
+
+    ./sbt sonatypeRelease
+
 
 ## TODOs
 
