@@ -1,4 +1,19 @@
-Release 0.3.0. - 2013/1/13
+Release 0.5.1 - 2015/1/17
+
+* Big fixes
+  1. Reconnect to fluentd servers at flush() correctly(Contributed by @anekos).
+  2. Flush buffers when closing.
+
+Release 0.5.0
+
+* Deprecated scala 2.9.x support.
+* Refactoring tests.
+
+Release 0.4.0
+
+* Using json as serialization format instead of msgpack-scala.
+
+Release 0.3.0 - 2013/1/13
 
 * Scala native class support(basic collections/options).
 
