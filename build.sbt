@@ -6,7 +6,7 @@ organization := "org.fluentd"
 
 name := "fluent-logger-scala"
 
-version := "0.5.1-SNAPSHOT"
+version := "0.5.1"
 
 publishMavenStyle := true
 
