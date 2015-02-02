@@ -96,11 +96,6 @@ After publishing, you can close, promote and drop the published repositorty with
     ./sbt sonatypeRelease
 
 
-## TODOs
-
-* Set support(This is WIP).
-* Handling Java objects and Scala objects transparently.
-
 ## License and Copyright
 
 * Copyright © 2011- Tsuyoshi Ozawa
