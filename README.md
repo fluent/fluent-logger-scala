@@ -98,7 +98,7 @@ After publishing, you can close, promote and drop the published repositorty with
 
 ## License and Copyright
 
-* Copyright © 2011- Tsuyoshi Ozawa
+* Copyright © 2011- Tsuyoshi Ozawa and Taro L. Saito
 * Apache License, Version 2.0
 
 ## Misc
