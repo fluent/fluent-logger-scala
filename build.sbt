@@ -37,7 +37,7 @@ libraryDependencies ++= Seq(
 )
 
 pomExtra := (
-  <url>https://github.com/oza/fluent-logger-scala</url>
+  <url>https://github.com/fluent/fluent-logger-scala</url>
   <licenses>
     <license>
       <name>Apache License, Version 2</name>
@@ -46,8 +46,8 @@ pomExtra := (
     </license>
   </licenses>
   <scm>
-    <url>git://github.com/oza/fluent-logger-scala.git</url>
-    <connection>scm:git:git://github.com/oza/fluent-logger-scala.git</connection>
+    <url>git://github.com/fluent/fluent-logger-scala.git</url>
+    <connection>scm:git:git://github.com/fluent/fluent-logger-scala.git</connection>
   </scm>
   <developers>
     <developer>
