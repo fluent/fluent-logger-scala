@@ -10,48 +10,31 @@ version := "0.5.1-SNAPSHOT"
 
 publishMavenStyle := true
 
-crossScalaVersions := Seq("2.10.4", "2.11.0")
+scalaVersion := "2.11.5"
 
-val SCALA_VERSION = "2.11.0"
-
-scalaVersion := SCALA_VERSION
+crossScalaVersions := Seq("2.10.4", scalaVersion.value)
 
 resolvers ++= Seq(
-  "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases",
-  "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
-  "MessagePack For Scala Repository" at "http://takezoux2.github.com/maven"
+  "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases"
 )
 
-scalacOptions <++= scalaVersion map { v =>
-  if (v.startsWith("2.10"))
-    Seq("-deprecation", "-feature", "-language:implicitConversions")
-  else
-    Seq("-deprecation")
-}
-
+scalacOptions ++= Seq("-deprecation", "-feature", "-language:implicitConversions")
 
 logBuffered in Test := false
 
-
 libraryDependencies ++= Seq(
-  "org.fluentd" % "fluent-logger" % "0.2.11",
-  "junit" % "junit" % "4.11" % "test",
-  "org.slf4j" % "slf4j-api" % "1.7.7",
-  "org.slf4j" % "slf4j-simple" % "1.7.7" % "test",
+  "org.fluentd" % "fluent-logger" % "0.3.1",
+  "junit" % "junit" % "4.12" % "test",
+  "org.slf4j" % "slf4j-api" % "1.7.10",
+  "org.slf4j" % "slf4j-simple" % "1.7.10" % "test",
   "org.xerial" % "fluentd-standalone" % "0.1.2"
 )
 
-libraryDependencies <++=  scalaVersion { sv =>
-  if (sv.startsWith("2.10"))
-    Seq("org.json4s" %% "json4s-native" % "3.2.9",
-        "org.scalatest" %% "scalatest" % "2.1.3" % "test",
-        "org.scala-lang" % "scala-actors" % "2.10.4" % "test")
-  else //(sv.startsWith("2.11"))
-    Seq("org.json4s" %% "json4s-native" % "3.2.9",
-        "org.scalatest" %% "scalatest" % "2.1.3" % "test",
-        "org.scala-lang" % "scala-actors" % "2.11.0" % "test")
-}
-
+libraryDependencies ++= Seq(
+  "org.json4s" %% "json4s-native" % "3.2.11",
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+  "org.scala-lang" % "scala-actors" % scalaVersion.value % "test"
+)
 
 pomExtra := (
   <url>https://github.com/oza/fluent-logger-scala</url>
