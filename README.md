@@ -1,5 +1,7 @@
 # fluent-logger-scala -A Scala structured logger for Fluentd-
 
+[![Build Status](https://travis-ci.org/fluent/fluent-logger-scala.svg?branch=develop)](https://travis-ci.org/fluent/fluent-logger-scala)
+
 Many web/mobile applications generate huge amount of event logs (c,f. login, logout, purchase, follow, etc). To analyze these event logs could be really valuable for improving the service. However, the challenge is collecting these logs easily and reliably.
 
 
