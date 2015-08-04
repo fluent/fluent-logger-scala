@@ -10,9 +10,9 @@ version := "0.5.1-SNAPSHOT"
 
 publishMavenStyle := true
 
-scalaVersion := "2.11.5"
+scalaVersion := "2.11.7"
 
-crossScalaVersions := Seq("2.10.4", scalaVersion.value)
+crossScalaVersions := Seq("2.10.5", scalaVersion.value)
 
 resolvers ++= Seq(
   "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases"
@@ -23,16 +23,16 @@ scalacOptions ++= Seq("-deprecation", "-feature", "-language:implicitConversions
 logBuffered in Test := false
 
 libraryDependencies ++= Seq(
-  "org.fluentd" % "fluent-logger" % "0.3.1",
+  "org.fluentd" % "fluent-logger" % "0.3.2",
   "junit" % "junit" % "4.12" % "test",
-  "org.slf4j" % "slf4j-api" % "1.7.10",
-  "org.slf4j" % "slf4j-simple" % "1.7.10" % "test",
+  "org.slf4j" % "slf4j-api" % "1.7.12",
+  "org.slf4j" % "slf4j-simple" % "1.7.12" % "test",
   "org.xerial" % "fluentd-standalone" % "0.1.2"
 )
 
 libraryDependencies ++= Seq(
   "org.json4s" %% "json4s-native" % "3.2.11",
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+  "org.scalatest" %% "scalatest" % "2.2.5" % "test",
   "org.scala-lang" % "scala-actors" % scalaVersion.value % "test"
 )
 
