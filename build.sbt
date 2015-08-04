@@ -1,7 +1,3 @@
-import SonatypeKeys._
-
-sonatypeSettings
-
 organization := "org.fluentd"
 
 name := "fluent-logger-scala"
