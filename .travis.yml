@@ -12,6 +12,7 @@ before_install: gem install fluentd
 jdk:
  - openjdk7
  - oraclejdk7
+ - oraclejdk8
 
 branches:
   only:
