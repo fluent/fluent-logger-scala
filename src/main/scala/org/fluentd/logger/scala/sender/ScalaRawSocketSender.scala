@@ -2,7 +2,7 @@ package org.fluentd.logger.scala.sender
 
 import java.io.{BufferedOutputStream, IOException}
 import java.net.{InetSocketAddress, Socket}
-import java.nio.ByteBuffer
+import java.nio.{Buffer, ByteBuffer}
 import org.fluentd.logger.sender.ExponentialDelayReconnector
 import org.json4s._
 import org.json4s.native.Serialization
@@ -23,16 +23,16 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
   var socket:Socket = null
   var out:BufferedOutputStream = null
   open()
-  
+
   def this(host:String, port:Int) {
     this(host, port, 3 * 1000, 8 * 1024 * 1024)
   } 
-  
+
   def this() {
     this("localhost", 24224)
   }
-  
-  def open() = {
+
+  def open(): Unit = {
     try {
       connect()
     } catch {
@@ -43,8 +43,8 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
         close()
     }
   }
-  
-  def connect() = {
+
+  def connect(): Unit = {
     try {
       socket = new Socket()
       socket.connect(server)
@@ -57,8 +57,8 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
         throw e
     }
   }
-  
-  def reconnect(forceReconnect: Boolean) {
+
+  def reconnect(forceReconnect: Boolean): Unit = {
     if (socket == null) {
       connect()
     } else if (forceReconnect || socket.isClosed() || (!socket.isConnected())) {
@@ -66,8 +66,8 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
       connect()
     }
   }
-  
-  def close () = {
+
+  def close(): Unit = {
     // close output stream
     if (out != null) {
       try {
@@ -116,7 +116,6 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
         false
     }
   }
-  
 
   def send(bytes: Array[Byte]): Boolean = synchronized {
     // buffering
@@ -134,7 +133,7 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
       true
     }
   }
-  
+
   def getBuffer(): Array[Byte] = {
     val len = pendings.position()
     pendings.position(0)
@@ -143,11 +142,11 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
     ret
   }
 
-  def clearBuffer() = {
+  def clearBuffer(): Buffer = {
     pendings.clear()
   }
 
-  def flush() = synchronized {
+  def flush(): Unit = synchronized {
     try {
       // check whether connection is established or not
       reconnect(!reconnector.isErrorHistoryEmpty)

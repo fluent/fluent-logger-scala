@@ -43,18 +43,19 @@ object FluentLoggerFactory {
     loggers.put(tag, logger)
     logger
   }
-  
-  def flushAll() {
-    for ((tag, logger) <- loggers)
-      logger.flush
+
+  def flushAll(): Unit = {
+    for ((_, logger) <- loggers)
+      logger.flush()
   }
-  def closeAll() = {
-    for ((tag, logger) <- loggers) {
-      logger.flush
-      logger.close
+
+  def closeAll(): Unit = {
+    for ((_, logger) <- loggers) {
+      logger.flush()
+      logger.close()
     }
   }
-  
+
 }
 
 class FluentLoggerFactory {

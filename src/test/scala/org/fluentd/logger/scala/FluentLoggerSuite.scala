@@ -33,7 +33,7 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
   var fluentd : Option[FluentdStandalone] = None
   var logger : FluentLogger = null
 
-  override def beforeAll {
+  override def beforeAll(): Unit = {
     // Start local fluentd server
     fluentd = Some(FluentdStandalone.start())
     val port = fluentd.get.port
@@ -42,7 +42,7 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
     }
   }
 
-  override def afterAll {
+  override def afterAll(): Unit = {
     // Terminate the fluentd server, if started
     fluentd.map { _.stop }
   }
