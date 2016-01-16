@@ -97,13 +97,13 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
   test("test sending big List object") {
     val ev = new HashMap[String, List[String]]()
     for (i <- 1 to 100) {
-      var list: List[String] = List();
+      var list: List[String] = List()
    	  for (j <- 1 to 100) {
         list = j.toString::list
       }
       ev.put("key"+i.toString, list)
     }
-    logger.log("test03", ev);
+    logger.log("test03", ev)
     FluentLoggerFactory.flushAll
     FluentLoggerFactory.closeAll
   }

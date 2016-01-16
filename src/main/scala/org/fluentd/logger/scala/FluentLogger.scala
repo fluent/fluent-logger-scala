@@ -6,11 +6,11 @@ import scala.collection.Map
 case class FluentLogger(tag :String, sender: Sender) {
   
   def log(label: String, key: String, value: Any): Boolean = {
-    log(label, key, value, 0);
+    log(label, key, value, 0)
   }
   
   def log(label: String, key: String, value: Any, timestamp: Long): Boolean = {
-    log(label, Map(key -> value), timestamp);
+    log(label, Map(key -> value), timestamp)
   }
   
   def log(label: String, data: Map[String, Any]): Boolean = {
