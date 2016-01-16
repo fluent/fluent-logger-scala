@@ -37,7 +37,7 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
       connect()
     } catch {
       case e: IOException => 
-        LOG.severe("Failed to connect fluentd: " + server.toString())
+        LOG.severe(s"Failed to connect fluentd: $server")
         LOG.severe("Connection will be retried")
         e.printStackTrace()
         close()
@@ -111,7 +111,7 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
       return true
     } catch {
       case e: IOException =>
-        LOG.severe("Cannot serialize event: " + event)
+        LOG.severe(s"Cannot serialize event: $event")
         e.printStackTrace()
         return false
     }
@@ -121,7 +121,7 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
   def send(bytes: Array[Byte]): Boolean = synchronized {
     // buffering
     if (pendings.position() + bytes.length > pendings.capacity()) {
-      LOG.severe("Cannot send logs to " + server.toString())
+      LOG.severe(s"Cannot send logs to $server")
       return false
     }
     pendings.put(bytes)

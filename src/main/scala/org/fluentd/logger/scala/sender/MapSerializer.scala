@@ -26,6 +26,6 @@ object MapSerializer extends Serializer[Map[String, Any]] {
 
   case class AnyMap(values: Map[String, Any]) 
   def deserialize(implicit format: Formats): PartialFunction[(TypeInfo, JValue), Map[String, Any]] = {
-    case x => throw new MappingException("Can't convert " + x + " to Event")
+    case x => throw new MappingException(s"Can't convert $x to Event")
   }
 }

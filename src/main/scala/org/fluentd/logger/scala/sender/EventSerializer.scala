@@ -18,7 +18,7 @@ object EventSerializer extends Serializer[Event] {
         new Event(tag, time.toLong, null)
       case JNothing =>
         new Event(null, 0, null)
-      case x => throw new MappingException("Can't convert " + x + " to Event")
+      case x => throw new MappingException(s"Can't convert $x to Event")
     }
   }
 
