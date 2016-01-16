@@ -108,12 +108,12 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
       // serialize tag, timestamp and data
       val json = Serialization.write(event)
       send(json.getBytes("UTF-8"))
-      return true
+      true
     } catch {
       case e: IOException =>
         LOG.severe(s"Cannot serialize event: $event")
         e.printStackTrace()
-        return false
+        false
     }
   }
   
@@ -122,19 +122,17 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
     // buffering
     if (pendings.position() + bytes.length > pendings.capacity()) {
       LOG.severe(s"Cannot send logs to $server")
-      return false
+      false
+    } else {
+      pendings.put(bytes)
+
+      if (reconnector.enableReconnection(System.currentTimeMillis())) {
+        // send pending data
+        flush()
+      }
+
+      true
     }
-    pendings.put(bytes)
-
-    // suppress reconnection burst
-    if (!reconnector.enableReconnection(System.currentTimeMillis())) {
-      return true
-    }
-
-    // send pending data
-    flush()
-
-    return true
   }
   
   def getBuffer(): Array[Byte] = {
@@ -142,7 +140,7 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
     pendings.position(0)
     val ret = new Array[Byte](len)
     pendings.get(ret, 0, len)
-    return ret
+    ret
   }
 
   def clearBuffer() = {
