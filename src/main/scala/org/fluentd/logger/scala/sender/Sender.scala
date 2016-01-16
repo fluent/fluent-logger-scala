@@ -1,6 +1,6 @@
 package org.fluentd.logger.scala.sender
 
-import scala.collection.Map;
+import scala.collection.Map
 
 trait Sender {
   def emit(tag: String, data: Map[String, Any]): Boolean;

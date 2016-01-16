@@ -17,18 +17,14 @@
 //
 package org.fluentd.logger.scala
 
-
+import org.fluentd.logger.scala.sender.{EventSerializer, MapSerializer}
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import org.scalatest.{BeforeAndAfterAll, Tag, FunSuite, BeforeAndAfter}
-import scala.collection.mutable.HashMap
-import org.json4s.native.Serialization
 import org.json4s.NoTypeHints
-import org.fluentd.logger.scala.sender.EventSerializer
-import org.fluentd.logger.scala.sender.MapSerializer
+import org.json4s.native.Serialization
+import org.scalatest.{BeforeAndAfterAll, Tag, FunSuite}
+import org.scalatest.junit.JUnitRunner
+import scala.collection.mutable.HashMap
 import xerial.fluentd.FluentdStandalone
-import java.net.Socket
-import java.io.IOException
 
 @RunWith(classOf[JUnitRunner])
 class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {

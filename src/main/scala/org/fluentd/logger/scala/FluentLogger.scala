@@ -1,12 +1,7 @@
 package org.fluentd.logger.scala
 
-import org.fluentd.logger.{FluentLogger => JavaFluentLogger}
-//import scala.collection.immutable.{Map => ImmutableMap}
-//import scala.collection.mutable.{Map => MutableMap}
-import scala.collection.JavaConversions._
 import org.fluentd.logger.scala.sender.Sender
-import org.fluentd.logger.scala.sender.ScalaRawSocketSender
-import scala.collection.Map;
+import scala.collection.Map
 
 case class FluentLogger(tag :String, sender: Sender) {
   

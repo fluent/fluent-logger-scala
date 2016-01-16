@@ -17,11 +17,9 @@
 //
 package org.fluentd.logger.scala
 
-import scala.collection.JavaConversions._
 import org.fluentd.logger.{Constants => JavaConstants}
-import org.fluentd.logger.sender.RawSocketSender
-import scala.collection.mutable.WeakHashMap
 import org.fluentd.logger.scala.sender.ScalaRawSocketSender
+import scala.collection.mutable.WeakHashMap
 
 
 object FluentLoggerFactory {

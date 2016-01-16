@@ -1,15 +1,12 @@
 package org.fluentd.logger.scala.sender
 
-import org.fluentd.logger.sender.RawSocketSender
+import java.io.{BufferedOutputStream, IOException}
+import java.net.{InetSocketAddress, Socket}
 import java.nio.ByteBuffer
-import java.net.InetSocketAddress
 import org.fluentd.logger.sender.ExponentialDelayReconnector
-import java.io.IOException
-import java.net.Socket
-import java.io.BufferedOutputStream
-import scala.collection.Map
 import org.json4s._
 import org.json4s.native.Serialization
+import scala.collection.Map
 
 class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int) 
     extends Sender {
