@@ -8,7 +8,7 @@ publishMavenStyle := true
 
 scalaVersion := "2.11.7"
 
-crossScalaVersions := Seq("2.10.5", scalaVersion.value)
+crossScalaVersions := Seq("2.10.6", scalaVersion.value)
 
 resolvers ++= Seq(
   "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases"
