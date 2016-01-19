@@ -17,18 +17,14 @@
 //
 package org.fluentd.logger.scala
 
-
+import org.fluentd.logger.scala.sender.{EventSerializer, MapSerializer}
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import org.scalatest.{BeforeAndAfterAll, Tag, FunSuite, BeforeAndAfter}
-import scala.collection.mutable.HashMap
-import org.json4s.native.Serialization
 import org.json4s.NoTypeHints
-import org.fluentd.logger.scala.sender.EventSerializer
-import org.fluentd.logger.scala.sender.MapSerializer
+import org.json4s.native.Serialization
+import org.scalatest.{BeforeAndAfterAll, Tag, FunSuite}
+import org.scalatest.junit.JUnitRunner
+import scala.collection.mutable.HashMap
 import xerial.fluentd.FluentdStandalone
-import java.net.Socket
-import java.io.IOException
 
 @RunWith(classOf[JUnitRunner])
 class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
@@ -37,7 +33,7 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
   var fluentd : Option[FluentdStandalone] = None
   var logger : FluentLogger = null
 
-  override def beforeAll {
+  override def beforeAll(): Unit = {
     // Start local fluentd server
     fluentd = Some(FluentdStandalone.start())
     val port = fluentd.get.port
@@ -46,7 +42,7 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
     }
   }
 
-  override def afterAll {
+  override def afterAll(): Unit = {
     // Terminate the fluentd server, if started
     fluentd.map { _.stop }
   }
@@ -72,8 +68,8 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
     logger.log("test01", "foo", "bar")
     logger.log("test01", "foo", "bar", ts3)
     
-    FluentLoggerFactory.flushAll
-    FluentLoggerFactory.closeAll
+    FluentLoggerFactory.flushAll()
+    FluentLoggerFactory.closeAll()
   }
   
   test("test big hash map") {
@@ -82,8 +78,8 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
       data.put("k"+i.toString, i.toString)
     }
     logger.log("test01", data)
-    FluentLoggerFactory.flushAll
-    FluentLoggerFactory.closeAll
+    FluentLoggerFactory.flushAll()
+    FluentLoggerFactory.closeAll()
   }
   
   test("test sending lots List objects") {
@@ -94,27 +90,27 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
       ev.put("key1", list)
       logger.log("test02", ev)
     }
-    FluentLoggerFactory.flushAll
-    FluentLoggerFactory.closeAll
+    FluentLoggerFactory.flushAll()
+    FluentLoggerFactory.closeAll()
   }
  
   test("test sending big List object") {
     val ev = new HashMap[String, List[String]]()
     for (i <- 1 to 100) {
-      var list: List[String] = List();
+      var list: List[String] = List()
    	  for (j <- 1 to 100) {
         list = j.toString::list
       }
       ev.put("key"+i.toString, list)
     }
-    logger.log("test03", ev);
-    FluentLoggerFactory.flushAll
-    FluentLoggerFactory.closeAll
+    logger.log("test03", ev)
+    FluentLoggerFactory.flushAll()
+    FluentLoggerFactory.closeAll()
   }
   
   test("test sending nested Map object") {
     val ev = new HashMap[String, HashMap[String, String]]()
-    var innerMap = HashMap[String, String]()
+    val innerMap = HashMap[String, String]()
     for (i <- 1 to 100) {
       innerMap.put(i.toString, i.toString)
     }
@@ -124,7 +120,7 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
   
   test("test sending nested Map[String, Int] object") {
     val ev = new HashMap[String, HashMap[String, Int]]()
-    var innerMap = HashMap[String, Int]()
+    val innerMap = HashMap[String, Int]()
     for (i <- 1 to 100) {
       innerMap.put(i.toString, i)
     }
@@ -142,8 +138,8 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
       ev.put("key"+i.toString, list.toSet)
     }
     logger.log("test01", ev)
-    FluentLoggerFactory.flushAll
-    FluentLoggerFactory.closeAll
+    FluentLoggerFactory.flushAll()
+    FluentLoggerFactory.closeAll()
   }
   
   test("test more nested objects") {
@@ -159,8 +155,8 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
     
     parent.put("key1", ev)
     logger.log("test01", parent)
-    FluentLoggerFactory.flushAll
-    FluentLoggerFactory.closeAll
+    FluentLoggerFactory.flushAll()
+    FluentLoggerFactory.closeAll()
   }
 
   test("test sending Loggable object") {
@@ -169,8 +165,8 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
       def toRecord = Map("key" -> "value")
     }
     logger.log("test01", o, ts)
-    FluentLoggerFactory.flushAll
-    FluentLoggerFactory.closeAll
+    FluentLoggerFactory.flushAll()
+    FluentLoggerFactory.closeAll()
   }
 
   test("close", Tag("close")) {
@@ -183,6 +179,6 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
     getLogger("tag2")
     getLogger("tag3")
 
-    FluentLoggerFactory.closeAll
+    FluentLoggerFactory.closeAll()
   }
 }

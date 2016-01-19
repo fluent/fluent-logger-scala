@@ -1,17 +1,7 @@
 package org.fluentd.logger.scala.sender
 
-import org.json4s.Serializer
-import org.json4s.Formats
-import org.json4s.JsonAST.JObject
-import org.json4s.JsonAST.JField
-import org.json4s.Extraction
-import org.json4s.JsonAST.JValue
-import org.json4s.TypeInfo
-import org.json4s.JsonAST.JArray
-import org.json4s.JsonAST.JInt
-import org.json4s.JsonAST.JString
-import org.json4s.JsonAST.JNothing
-import org.json4s.MappingException
+import org.json4s.{Extraction, Formats, MappingException, Serializer, TypeInfo}
+import org.json4s.JsonAST.{JArray, JInt, JNothing, JObject, JString, JValue}
 
 object EventSerializer extends Serializer[Event] {
   private val EventClass = classOf[Event]
@@ -28,7 +18,7 @@ object EventSerializer extends Serializer[Event] {
         new Event(tag, time.toLong, null)
       case JNothing =>
         new Event(null, 0, null)
-      case x => throw new MappingException("Can't convert " + x + " to Event")
+      case x => throw new MappingException(s"Can't convert $x to Event")
     }
   }
 
