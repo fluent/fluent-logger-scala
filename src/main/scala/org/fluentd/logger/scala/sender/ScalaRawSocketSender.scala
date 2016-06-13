@@ -107,8 +107,7 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
     try {
       // serialize tag, timestamp and data
       val json = Serialization.write(event)
-      send(json.getBytes("UTF-8"))
-      true
+      return send(json.getBytes("UTF-8"))
     } catch {
       case e: IOException =>
         LOG.severe(s"Cannot serialize event: $event")
