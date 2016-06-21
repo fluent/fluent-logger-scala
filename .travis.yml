@@ -7,7 +7,10 @@ sudo: false
 
 script: sbt ++$TRAVIS_SCALA_VERSION test -Dloglevel=debug
 
-before_install: gem install fluentd
+before_install:
+  - rvm install 2.1.5
+  - rvm use 2.1
+  - gem install fluentd
 
 jdk:
  - openjdk7
