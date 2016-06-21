@@ -1,3 +1,17 @@
+Release 0.6.0 - 2016/6/21
+
+* Dependencies
+  1. Update Scala version from 2.10.4, 2.11.5 to 2.10.6, 2.11.7.
+  2. Update fluent-logger from 0.3.1 to 0.3.2.
+  3. Update slf4j-api and slf4j-simple from 1.7.10 to 1.7.13.
+  4. Update json4s-native from 3.2.11 to 3.3.0.
+
+* Bug fixes
+  1. Fix to return false if it exceeds the buffer capacity.
+
+* Misc
+  1. Refactor code.
+
 Release 0.5.1 - 2015/1/17
 
 * Big fixes
