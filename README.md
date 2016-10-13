@@ -17,19 +17,19 @@ Please see [QuickStart](https://github.com/fluent/fluent-logger-scala/wiki/Quick
 Add sonatype repository and dependencies to build.sbt file as follows:
 
     resolvers += "Apache Maven Central Repository" at "http://repo.maven.apache.org/maven2/"
-    
-    libraryDependencies += "org.fluentd" % "fluent-logger-scala_<scala_version>" % "0.5.1"
-    
+
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_<scala_version>" % "0.6.0"
+
 
 Please replace ```<scala_version>``` with scala compiler version you use.
 Currently, ```<scala_version>``` can be replaced with 2.10 or 2.11.
 For instance,
 
-    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.10" % "0.5.1"
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.10" % "0.6.0"
 
 or
 
-    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.11" % "0.5.1"
+    libraryDependencies += "org.fluentd" % "fluent-logger-scala_2.11" % "0.6.0"
 
 ## Installation(for scala 2.9)
 
