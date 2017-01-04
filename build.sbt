@@ -1,30 +1,38 @@
-organization := "org.fluentd"
+import ReleaseTransformations._
 
+organization := "org.fluentd"
 name := "fluent-logger-scala"
 
-version := "0.6.1-SNAPSHOT"
-
 publishMavenStyle := true
-
-scalaVersion := "2.11.8"
-
-crossScalaVersions := Seq("2.10.6", scalaVersion.value)
-
-resolvers ++= Seq(
-  "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases"
-)
-
+scalaVersion := "2.12.1"
+crossScalaVersions := Seq("2.11.8", scalaVersion.value)
 scalacOptions ++= Seq("-deprecation", "-feature", "-language:implicitConversions")
-
 logBuffered in Test := false
-
 libraryDependencies ++= Seq(
   "org.fluentd" % "fluent-logger" % "0.3.2",
-  "org.json4s" %% "json4s-native" % "3.4.0",
+  "org.json4s" %% "json4s-native" % "3.5.0",
   "junit" % "junit" % "4.12" % Test,
-  "org.xerial" % "fluentd-standalone" % "0.1.2" % Test,
-  "org.scalatest" %% "scalatest" % "3.0.0" % Test
+  "org.xerial" %% "fluentd-standalone" % "0.14.11" % Test,
+  "org.scalatest" %% "scalatest" % "3.0.1" % Test
 )
+
+// Release settings
+releaseTagName := { (version in ThisBuild).value }
+releaseProcess := Seq[ReleaseStep](
+  checkSnapshotDependencies,
+  inquireVersions,
+  runClean,
+  runTest,
+  setReleaseVersion,
+  commitReleaseVersion,
+  tagRelease,
+  ReleaseStep(action = Command.process("publishSigned", _), enableCrossBuild = true),
+  setNextVersion,
+  commitNextVersion,
+  ReleaseStep(action = Command.process("sonatypeReleaseAll", _), enableCrossBuild = true),
+  pushChanges
+)
+releaseCrossBuild := true
 
 pomExtra := (
   <url>https://github.com/fluent/fluent-logger-scala</url>
