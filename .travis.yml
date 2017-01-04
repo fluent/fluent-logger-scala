@@ -1,28 +1,16 @@
 language: scala
 scala:
-  - 2.10.6
   - 2.11.8
+  - 2.12.1
 
 sudo: false
 
-script: sbt ++$TRAVIS_SCALA_VERSION test -Dloglevel=debug
+script: sbt ++$TRAVIS_SCALA_VERSION test
 
 before_install:
-  - rvm install 2.1.5
-  - rvm use 2.1
-  - gem install fluentd
+  - rvm install 2.2.0
+  - rvm use 2.2.0
+  - gem install fluentd -v 0.14.11
 
 jdk:
- - openjdk7
- - oraclejdk7
  - oraclejdk8
-
-branches:
-  only:
-    - master
-    - develop
-
-notifications:
-  email:
-    - leo@xerial.org
-    - ozawa.tsuyoshi@gmail.com
