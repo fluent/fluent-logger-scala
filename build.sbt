@@ -20,13 +20,10 @@ logBuffered in Test := false
 
 libraryDependencies ++= Seq(
   "org.fluentd" % "fluent-logger" % "0.3.2",
-  "junit" % "junit" % "4.12" % Test,
-  "org.slf4j" % "slf4j-api" % "1.7.21",
-  "org.slf4j" % "slf4j-simple" % "1.7.21" % Test,
-  "org.xerial" % "fluentd-standalone" % "0.1.2",
   "org.json4s" %% "json4s-native" % "3.4.0",
-  "org.scalatest" %% "scalatest" % "3.0.0" % Test,
-  "org.scala-lang" % "scala-actors" % scalaVersion.value % Test
+  "junit" % "junit" % "4.12" % Test,
+  "org.xerial" % "fluentd-standalone" % "0.1.2" % Test,
+  "org.scalatest" %% "scalatest" % "3.0.0" % Test
 )
 
 pomExtra := (
