@@ -23,23 +23,23 @@ libraryDependencies += "org.fluentd" %% "fluent-logger-scala" % "(version)"
 libraryDependencies += "org.fluentd" %% "fluent-logger-scala" % "0.6.0"
 ```
 
+### API
 
-## API
+fluent-logger-scala API is based on fluent-logger-java:
 
-APIs base on fluent-logger-java.
+```
+FluentLoggerFactory#getLogger(tag: String): FluentLogger
+FluentLoggerFactory#getLogger(tag: String, host: String, port: Int): FluentLogger
+FluentLoggerFactory#getLogger(tag: String, host: String, port: Int, timeout: Int, bufferCapacity: Int): FluentLogger
+FluentLoggerFactory#flushAll(): Unit
+FluentLoggerFactory#closeAll(): Unit
 
-    FluentLoggerFactory#getLogger(tag: String): FluentLogger
-    FluentLoggerFactory#getLogger(tag: String, host: String, port: Int): FluentLogger
-    FluentLoggerFactory#getLogger(tag: String, host: String, port: Int, timeout: Int, bufferCapacity: Int): FluentLogger
-    FluentLoggerFactory#flushAll(): Unit
-    FluentLoggerFactory#closeAll(): Unit
-
-    FluentLogger#log(label: String, key: String, value: Any): Boolean
-    FluentLogger#log(label: String, key: String, value: Any, timestamp: Long): Boolean
-    FluentLogger#log(tag:String, mutableMap/immutableMap[String, Any]):Boolean
-    FluentLogger#flush()
-    FluentLogger#close()
-
+FluentLogger#log(label: String, key: String, value: Any): Boolean
+FluentLogger#log(label: String, key: String, value: Any, timestamp: Long): Boolean
+FluentLogger#log(tag:String, mutableMap/immutableMap[String, Any]):Boolean
+FluentLogger#flush()
+FluentLogger#close()
+```
 
 ## For Developers
 
