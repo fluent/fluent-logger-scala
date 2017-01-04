@@ -1,4 +1,10 @@
-Release 0.6.0 - 2016/6/21
+# Release Notes
+
+## Relaese 0.7.0 
+ - Support Scala 2.12 and 2.11
+ - Dropped Scala 2.10 support
+
+## Release 0.6.0 - 2016/6/21
 
 * Dependencies
   1. Update Scala version from 2.10.4, 2.11.5 to 2.10.6, 2.11.7.
@@ -12,30 +18,30 @@ Release 0.6.0 - 2016/6/21
 * Misc
   1. Refactor code.
 
-Release 0.5.1 - 2015/1/17
+## Release 0.5.1 - 2015/1/17
 
 * Big fixes
   1. Reconnect to fluentd servers at flush() correctly(Contributed by @anekos).
   2. Flush buffers when closing.
 
-Release 0.5.0
+## Release 0.5.0
 
 * Deprecated scala 2.9.x support.
 * Refactoring tests.
 
-Release 0.4.0
+## Release 0.4.0
 
 * Using json as serialization format instead of msgpack-scala.
 
-Release 0.3.0 - 2013/1/13
+## Release 0.3.0 - 2013/1/13
 
 * Scala native class support(basic collections/options).
 
-Release 0.2.0 - 2012/11/12
+## Release 0.2.0 - 2012/11/12
 
 * Changed to use fluent-logger-java
 * Added tests.
 
-Release 0.1.0 - 2011/11/03
+## Release 0.1.0 - 2011/11/03
 
 * First version
